@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Data Visualization</title>
+
+<style>
+:root{
+  --bg:#494399;
+  --text:#fff;
+  --muted:rgba(255,255,255,.75);
+  --hover:rgba(255,255,255,.12);
+  --active:rgba(0,0,0,.18);
+  --footer:#2c2c2c;
+}
+
+*{box-sizing:border-box;}
+body{
+  margin:0;
+  font-family:system-ui;
+  background:var(--bg);
+  color:var(--text);
+
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.wrap{
+  max-width:1200px;
+  margin: 0 auto;
+  padding:26px 28px 0;
+}
+
+/* HEADER */
+header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.logo img{height:28px;}
+
+.top-right{display:flex;gap:14px;align-items:center;}
+
+.burger{
+  width:44px;height:44px;border:0;background:none;
+  display:grid;place-items:center;border-radius:12px;
+  cursor:pointer;
+}
+.burger:hover{background:var(--hover);}
+.burger:active{background:var(--active);transform:translateY(1px);}
+
+.burger .lines,
+.burger .lines::before,
+.burger .lines::after{
+  content:"";
+  width:20px;height:2px;
+  background:white;
+  display:block;
+  position:relative;
+}
+.burger .lines::before{position:absolute;top:-6px;}
+.burger .lines::after{position:absolute;top:6px;}
+
+.social{display:flex;gap:10px;}
+.social img{width:18px;height:18px;}
+
+/* MAIN */
+main{
+  display:grid;
+  grid-template-columns:1.35fr .9fr;
+  gap:46px;
+  padding:36px 0 0;
+}
+
+.hero-media{
+  position:relative;
+  max-width:640px;
+}
+
+.hero-media img{
+  width:100%;
+  display:block;
+}
+
+.overlay-title{
+  position:absolute;
+  top:24px;
+  left:28px;
+  font-size:clamp(42px,4.8vw,50px);
+  font-weight:800;
+  line-height:1.05;
+  margin:0;
+}
+
+/* RIGHT */
+.side{padding-top:62px;}
+.block{margin-bottom:54px;}
+.block h3{letter-spacing:2px;font-size:18px;}
+.block p{color:var(--muted);font-size:13px;max-width:320px;}
+
+.more{
+  color:white;
+  text-decoration: underline;
+  text-underline-offset: 6px;
+  font-weight:800;
+  letter-spacing:2px;
+  display:inline-block;
+  padding:4px 0;
+}
+.more:hover{
+  opacity:.85;
+}
+.more:active{
+  opacity:.65;
+}
+
+/* FOOTER */
+footer{
+  background:var(--footer);
+  flex: 1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  font-size:12px;
+  padding: 20px;
+}
+
+/* RESPONSIVE */
+@media(max-width:980px){
+  main{grid-template-columns:1fr;}
+  .side{padding-top:0;}
+}
+</style>
+</head>
+
+<body>
+<div class="wrap">
+
+<header>
+  <a class="logo" href="#"><img src="logo.png"></a>
+
+  <div class="top-right">
+    <button class="burger"><span class="lines"></span></button>
+    <nav class="social">
+      <a href="#"><img src="facebook.png"></a>
+      <a href="#"><img src="twitter.png"></a>
+      <a href="#"><img src="instagram.png"></a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<section class="hero">
+<div class="hero-media">
+  <h1 class="overlay-title">Data Visualization</h1>
+  <img src="laptop.png" alt="Ноутбук">
+</div>
+</section>
+
+<aside class="side">
+
+<div class="block">
+<h3>01. GOALS</h3>
+<p>Sample text. Click to select the text box.</p>
+<a class="more" href="#">MORE</a>
+</div>
+
+<div class="block">
+<h3>02. STRATEGY</h3>
+<p>Sample text. Click to select the text box.</p>
+<a class="more" href="#">MORE</a>
+</div>
+
+</aside>
+</main>
+
+</div>
+
+<footer>
+Sample text. Click to select the text box. Click again or double<br>
+click to start editing the text.
+</footer>
+
+</body>
+</html>
