@@ -1,190 +1,306 @@
 <!doctype html>
 <html lang="uk">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Data Visualization</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Data Visualization</title>
 
-<style>
-:root{
-  --bg:#494399;
-  --text:#fff;
-  --muted:rgba(255,255,255,.75);
-  --hover:rgba(255,255,255,.12);
-  --active:rgba(0,0,0,.18);
-  --footer:#2c2c2c;
-}
+  <style>
+    :root{
+      --bg: #2f45c9;              /* просто синій фон */
+      --text: #ffffff;
+      --muted: rgba(255,255,255,.75);
+      --muted2: rgba(255,255,255,.55);
+      --card: rgba(0,0,0,.0);
 
-*{box-sizing:border-box;}
-body{
-  margin:0;
-  font-family:system-ui;
-  background:var(--bg);
-  color:var(--text);
+      --hover: rgba(255,255,255,.12);
+      --active: rgba(0,0,0,.18);
 
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
+      --footer: #2c2c2c;
+    }
 
-.wrap{
-  max-width:1200px;
-  margin: 0 auto;
-  padding:26px 28px 0;
-}
+    *{ box-sizing: border-box; }
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
 
-/* HEADER */
-header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
+    .wrap{
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 26px 28px 0;
+      position: relative;
+    }
 
-.logo img{height:28px;}
+    /* ===== HEADER ===== */
+    header{
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: 16px;
+      min-height: 48px;
+    }
 
-.top-right{display:flex;gap:14px;align-items:center;}
+    .logo{
+      display:flex;
+      align-items:center;
+      gap: 10px;
+      text-decoration:none;
+      color: var(--text);
+      font-weight: 700;
+      letter-spacing: .4px;
+    }
 
-.burger{
-  width:44px;height:44px;border:0;background:none;
-  display:grid;place-items:center;border-radius:12px;
-  cursor:pointer;
-}
-.burger:hover{background:var(--hover);}
-.burger:active{background:var(--active);transform:translateY(1px);}
+    .logo img{
+      width: 86px;
+      height: 28px;
+      object-fit: contain;
+      display:block;
+      opacity: .95;
+    }
 
-.burger .lines,
-.burger .lines::before,
-.burger .lines::after{
-  content:"";
-  width:20px;height:2px;
-  background:white;
-  display:block;
-  position:relative;
-}
-.burger .lines::before{position:absolute;top:-6px;}
-.burger .lines::after{position:absolute;top:6px;}
+    .top-right{
+      display:flex;
+      align-items:center;
+      gap: 14px;
+    }
 
-.social{display:flex;gap:10px;}
-.social img{width:18px;height:18px;}
+    /* Burger button */
+    .burger{
+      width: 44px;
+      height: 44px;
+      border: 0;
+      background: transparent;
+      border-radius: 12px;
+      cursor: pointer;
+      display:grid;
+      place-items:center;
+      transition: background-color 150ms ease, transform 80ms ease;
+    }
+    .burger:hover{ background: var(--hover); }
+    .burger:active{ transform: translateY(1px); background: var(--active); }
 
-/* MAIN */
-main{
-  display:grid;
-  grid-template-columns:1.35fr .9fr;
-  gap:46px;
-  padding:36px 0 0;
-}
+    /* 3 horizontal lines drawn in CSS */
+    .burger .lines,
+    .burger .lines::before,
+    .burger .lines::after{
+      content:"";
+      display:block;
+      width: 20px;
+      height: 2px;
+      background: rgba(255,255,255,.9);
+      border-radius: 2px;
+      position: relative;
+    }
+    .burger .lines::before{ position:absolute; top:-6px; left:0; }
+    .burger .lines::after{ position:absolute; top:6px; left:0; }
 
-.hero-media{
-  position:relative;
-  max-width:640px;
-}
+    /* Social icons (img placeholders) */
+    .social{
+      display:flex;
+      gap: 10px;
+      align-items:center;
+    }
+    .social a{
+      width: 26px;
+      height: 26px;
+      display:grid;
+      place-items:center;
+      border-radius: 999px;
+      text-decoration:none;
+      transition: background-color 150ms ease, transform 80ms ease;
+    }
+    .social a:hover{ background: var(--hover); }
+    .social a:active{ transform: translateY(1px); background: var(--active); }
+    .social img{
+      width: 18px;
+      height: 18px;
+      display:block;
+      object-fit: contain;
+      opacity: .95;
+    }
 
-.hero-media img{
-  width:100%;
-  display:block;
-}
+    /* ===== MAIN LAYOUT ===== */
+    main{
+      padding: 36px 0 54px;
+      display:grid;
+      grid-template-columns: 1.35fr 0.9fr;
+      gap: 46px;
+      align-items:start;
+      position: relative;
+    }
 
-.overlay-title{
-  position:absolute;
-  top:24px;
-  left:28px;
-  font-size:clamp(42px,4.8vw,50px);
-  font-weight:800;
-  line-height:1.05;
-  margin:0;
-}
+    /* Placeholder zone where you'll add the vertical teal stripe + image */
+    .stripe-zone{
+      position:absolute;
+      left: 32%;
+      top: 0;
+      bottom: -40px;
+      width: 280px;
+      /* intentionally empty — ти додаси полоску сам */
+      pointer-events:none;
+      opacity: 0;
+    }
 
-/* RIGHT */
-.side{padding-top:62px;}
-.block{margin-bottom:54px;}
-.block h3{letter-spacing:2px;font-size:18px;}
-.block p{color:var(--muted);font-size:13px;max-width:320px;}
+    /* LEFT */
+    .hero-title{
+      font-size: clamp(42px, 4.8vw, 66px);
+      line-height: 1.05;
+      font-weight: 800;
+      margin: 26px 0 18px;
+      letter-spacing: .2px;
+    }
 
-.more{
-  color:white;
-  text-decoration: underline;
-  text-underline-offset: 6px;
-  font-weight:800;
-  letter-spacing:2px;
-  display:inline-block;
-  padding:4px 0;
-}
-.more:hover{
-  opacity:.85;
-}
-.more:active{
-  opacity:.65;
-}
+    .hero-media{
+      background: rgba(0,0,0,.12);
+      border-radius: 0;
+      padding: 0;
+      overflow:hidden;
+      max-width: 640px;
+    }
 
-/* FOOTER */
-footer{
-  background:var(--footer);
-  flex: 1;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  font-size:12px;
-  padding: 20px;
-}
+    .hero-media img{
+      width: 100%;
+      height: auto;
+      display:block;
+    }
 
-/* RESPONSIVE */
-@media(max-width:980px){
-  main{grid-template-columns:1fr;}
-  .side{padding-top:0;}
-}
-</style>
+    /* RIGHT blocks */
+    .side{
+      padding-top: 62px; /* як на макеті, щоб блоки були нижче заголовка */
+    }
+
+    .block{
+      margin-bottom: 54px;
+    }
+
+    .block h3{
+      margin: 0 0 12px;
+      font-size: 18px;
+      letter-spacing: 2px;
+      opacity: .9;
+      font-weight: 800;
+    }
+
+    .block p{
+      margin: 0 0 14px;
+      color: var(--muted);
+      max-width: 320px;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    /* "MORE" link button */
+    .more{
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+      color: var(--text);
+      text-decoration:none;
+      font-weight: 800;
+      letter-spacing: 2px;
+      font-size: 12px;
+      padding: 8px 10px;
+      border-radius: 10px;
+      transition: background-color 150ms ease, transform 80ms ease;
+    }
+    .more::after{
+      content:"";
+      width: 38px;
+      height: 2px;
+      background: rgba(255,255,255,.75);
+      display:block;
+      border-radius: 2px;
+    }
+    .more:hover{ background: var(--hover); }
+    .more:active{ transform: translateY(1px); background: var(--active); }
+    
+    /* ===== FOOTER ===== */
+    footer{
+      background: var(--footer);
+      color: rgba(255,255,255,.85);
+      padding: 20px 16px;
+      text-align:center;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 980px){
+      main{
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+      .side{ padding-top: 0; }
+      .hero-media{ max-width: 100%; }
+    }
+  </style>
 </head>
 
 <body>
-<div class="wrap">
+  <div class="wrap">
+    <header>
+      <a class="logo" href="#">
+        <img src="logo.png" alt="logo">
+      </a>
 
-<header>
-  <a class="logo" href="#"><img src="logo.png"></a>
+      <div class="top-right">
+        <button class="burger" type="button" aria-label="Відкрити меню">
+          <span class="lines" aria-hidden="true"></span>
+        </button>
 
-  <div class="top-right">
-    <button class="burger"><span class="lines"></span></button>
-    <nav class="social">
-      <a href="#"><img src="facebook.png"></a>
-      <a href="#"><img src="twitter.png"></a>
-      <a href="#"><img src="instagram.png"></a>
-    </nav>
+        <nav class="social" aria-label="Соцмережі">
+          <a href="#" aria-label="Facebook">
+            <img src="facebook.png" alt="">
+          </a>
+          <a href="#" aria-label="Twitter">
+            <img src="twitter.png" alt="">
+          </a>
+          <a href="#" aria-label="Instagram">
+            <img src="instagram.png" alt="">
+          </a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <div class="stripe-zone" aria-hidden="true"></div>
+
+      <section class="hero">
+        <h1 class="hero-title">Data Visualization</h1>
+
+        <div class="hero-media">
+          <img src="laptop.png" alt="Ноутбук">
+        </div>
+      </section>
+
+      <aside class="side">
+        <div class="block">
+          <h3>01. GOALS</h3>
+          <p>
+            Sample text. Click to select the text box. Click again or double click
+            to start editing the text.
+          </p>
+          <a class="more" href="#">MORE</a>
+        </div>
+
+        <div class="block">
+          <h3>02. STRATEGY</h3>
+          <p>
+            Sample text. Click to select the text box. Click again or double click
+            to start editing the text.
+          </p>
+          <a class="more" href="#">MORE</a>
+        </div>
+      </aside>
+    </main>
   </div>
-</header>
 
-<main>
-
-<section class="hero">
-<div class="hero-media">
-  <h1 class="overlay-title">Data Visualization</h1>
-  <img src="laptop.png" alt="Ноутбук">
-</div>
-</section>
-
-<aside class="side">
-
-<div class="block">
-<h3>01. GOALS</h3>
-<p>Sample text. Click to select the text box.</p>
-<a class="more" href="#">MORE</a>
-</div>
-
-<div class="block">
-<h3>02. STRATEGY</h3>
-<p>Sample text. Click to select the text box.</p>
-<a class="more" href="#">MORE</a>
-</div>
-
-</aside>
-</main>
-
-</div>
-
-<footer>
-Sample text. Click to select the text box. Click again or double<br>
-click to start editing the text.
-</footer>
-
+  <footer>
+    Sample text. Click to select the text box. Click again or double<br>
+    click to start editing the text.
+  </footer>
 </body>
 </html>
